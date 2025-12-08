@@ -81,7 +81,7 @@ $query = mysqli_query($koneksi, $sql);
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top pt-3">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.php">
-                <img src="polibatam_logo_bw.png" alt="polibatam_logo_bw" height="100">
+                <img src="polibatam_logo_bw.png" alt="polibatam_logo_bw" height="120">
             </a>
             <div class="ms-auto">
                 <a href="login.php" class="btn btn-light rounded-pill px-4 shadow-sm text-primary fw-bold">
