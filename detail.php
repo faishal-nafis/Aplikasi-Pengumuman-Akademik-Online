@@ -9,7 +9,7 @@ if(isset($_GET['id'])){
     $query = mysqli_query($koneksi, "SELECT * FROM pengumuman WHERE id='$id'");
     $data = mysqli_fetch_array($query);
 
-    // Jika data tidak ditemukan
+    // Jika data tidak ditemukanw
     if(mysqli_num_rows($query) < 1) {
         die("Data tidak ditemukan...");
     }
