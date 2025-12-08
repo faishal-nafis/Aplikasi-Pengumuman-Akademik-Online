@@ -1,7 +1,6 @@
 <?php
 include "koneksi.php";
 
-// --- LOGIKA PENCARIAN ---
 $keyword = ""; 
 
 if (isset($_GET['cari'])) {
