@@ -155,7 +155,7 @@ $query = mysqli_query($koneksi, $sql);
                                 </p>
                             </div>
                             <div class="card-footer bg-transparent border-top-0 pb-4 ps-4">
-                                <a href="#" class="text-decoration-none fw-bold small">Baca Selengkapnya &rarr;</a>
+                                <a href="detail.php?id=<?= $row['id'] ?>" class="text-decoration-none fw-bold small">Baca Selengkapnya &rarr;</a>
                             </div>
                         </div>
                     </div>
