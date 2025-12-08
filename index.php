@@ -2,23 +2,19 @@
 include "koneksi.php";
 
 // --- LOGIKA PENCARIAN ---
-$keyword = ""; // Variabel untuk menyimpan kata kunci pencarian
+$keyword = ""; 
 
 if (isset($_GET['cari'])) {
-    // Jika tombol cari ditekan
     $keyword = $_GET['cari'];
     
-    // Gunakan mysqli_real_escape_string untuk keamanan dasar dari karakter aneh
     $safe_keyword = mysqli_real_escape_string($koneksi, $keyword);
     
-    // Cari di Judul ATAU di Isi pengumuman
     $sql = "SELECT * FROM pengumuman 
             WHERE judul LIKE '%$safe_keyword%' 
             OR isi LIKE '%$safe_keyword%' 
             OR kategori LIKE '%$safe_keyword%'
             ORDER BY tanggal_posting DESC";
 } else {
-    // Jika tidak ada pencarian, tampilkan semua
     $sql = "SELECT * FROM pengumuman ORDER BY tanggal_posting DESC";
 }
 
@@ -85,7 +81,7 @@ $query = mysqli_query($koneksi, $sql);
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top pt-3">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.php">
-                <img src="01_Logo_4_W_Polibatam_Vertikal@2x-1-300x279.png" alt="polibatam_logo_bw" height="100">
+                <img src="polibatam_bw.png" alt="polibatam_logo_bw" height="100">
             </a>
             <div class="ms-auto">
                 <a href="login.php" class="btn btn-light rounded-pill px-4 shadow-sm text-primary fw-bold">

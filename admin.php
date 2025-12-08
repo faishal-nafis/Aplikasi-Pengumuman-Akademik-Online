@@ -2,7 +2,6 @@
 session_start();
 include "koneksi.php";
 
-// Cek apakah user sudah login
 if (!isset($_SESSION['user'])) {
     header("location:login.php");
     exit();
@@ -10,7 +9,6 @@ if (!isset($_SESSION['user'])) {
 
 $user = $_SESSION['user'];
 
-// Ambil data pengumuman
 $query = mysqli_query($koneksi, "SELECT * FROM pengumuman ORDER BY tanggal_posting DESC");
 ?>
 

@@ -2,36 +2,28 @@
 session_start();
 include "koneksi.php";
 
-// 1. Cek apakah user sudah login (keamanan)
 if (!isset($_SESSION['user'])) {
     header("location:login.php");
     exit();
 }
-
-// 2. Ambil ID dari URL
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Ambil data pengumuman berdasarkan ID tersebut
     $query = mysqli_query($koneksi, "SELECT * FROM pengumuman WHERE id='$id'");
     $data = mysqli_fetch_array($query);
     
-    // Jika id sembarangan dan data tidak ditemukan, kembalikan ke dashboard
     if(mysqli_num_rows($query) < 1) {
         header("location:admin.php");
     }
 } else {
-    // Jika tidak ada ID di URL, kembalikan ke dashboard
     header("location:admin.php");
 }
 
-// 3. Proses Update Data saat tombol diklik
 if (isset($_POST['update'])) {
     $judul = $_POST['judul'];
     $kategori = $_POST['kategori'];
     $isi = $_POST['isi'];
 
-    // Query UPDATE
     $update = mysqli_query($koneksi, "UPDATE pengumuman SET 
                             judul='$judul', 
                             kategori='$kategori', 

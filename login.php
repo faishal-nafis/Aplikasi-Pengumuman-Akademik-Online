@@ -13,12 +13,8 @@ include "koneksi.php";
     
     <style>
         body {
-            /* --- BAGIAN GANTI GAMBAR --- */
-            /* Ganti link di dalam url('...') dengan link gambar Anda sendiri */
-            /* Bisa link online (https://...) atau file lokal (gambar.jpg) */
             background-image: url('bglogin.jpg');
             
-            /* Pengaturan agar gambar memenuhi layar */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -31,7 +27,6 @@ include "koneksi.php";
             position: relative;
         }
 
-        /* Overlay Hitam Transparan (Supaya teks form terbaca jelas) */
         body::before {
             content: "";
             position: absolute;
@@ -39,15 +34,15 @@ include "koneksi.php";
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.4); /* Tingkat kegelapan 40% */
+            background-color: rgba(0, 0, 0, 0.4);
             z-index: -1;
         }
 
         .card-login {
             border: none;
             border-radius: 15px;
-            background: rgba(255, 255, 255, 0.9); /* Latar putih sedikit transparan */
-            backdrop-filter: blur(5px); /* Efek blur di belakang kartu */
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             width: 100%;
             max-width: 400px;
@@ -81,7 +76,6 @@ include "koneksi.php";
             $username = $_POST['username'];
             $password = md5($_POST['password']);
 
-            // Contoh query untuk memeriksa kredensial pengguna
             $query = mysqli_query($koneksi, "SELECT*FROM user where username='$username' and password='$password'");
 
             if (mysqli_num_rows($query) > 0) {
