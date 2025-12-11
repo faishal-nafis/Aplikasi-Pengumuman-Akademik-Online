@@ -44,7 +44,7 @@ if (isset($_POST['simpan'])) {
                 <textarea name="isi" class="form-control" rows="5" required></textarea>
             </div>
             <button type="submit" name="simpan" class="btn btn-primary">Posting Sekarang</button>
-            <a href="dashboard.php" class="btn btn-secondary">Batal</a>
+            <a href="admin.php" class="btn btn-secondary">Batal</a>
         </form>
     </div>
 </body>
