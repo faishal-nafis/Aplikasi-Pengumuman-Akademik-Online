@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "koneksi.php";
+require_once __DIR__ . '/../config/koneksi.php';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -81,7 +81,7 @@ include "koneksi.php";
             if (mysqli_num_rows($query) > 0) {
                 $data = mysqli_fetch_array($query);
                 $_SESSION['user'] = $data;
-                echo "<script>alert('Selamat datang, Administrator dan Dosen!'); location.href='admin.php';</script>";
+                echo "<script>alert('Selamat datang, Administrator dan Dosen!'); location.href='../admin.php';</script>";
             }
             else {
                 echo "<script>alert('Login gagal! Periksa username dan password Anda.');</script>";

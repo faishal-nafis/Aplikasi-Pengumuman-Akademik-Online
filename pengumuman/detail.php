@@ -1,5 +1,6 @@
 <?php
-include "koneksi.php";
+require_once __DIR__ . '/../config/koneksi.php';
+
 
 // Cek apakah ada ID di URL
 if(isset($_GET['id'])){
@@ -136,7 +137,7 @@ if(isset($_GET['id'])){
                 <div class="col-lg-10">
                     
                     <div class="d-flex justify-content-between align-items-center mb-5">
-                        <a href="index.php" class="btn btn-back rounded-pill px-4">
+                        <a href="../index.php" class="btn btn-back rounded-pill px-4">
                             <i class="bi bi-arrow-left me-2"></i> KEMBALI
                         </a>
                         <button onclick="window.print()" class="btn btn-back rounded-circle p-2" title="Cetak Info">
@@ -202,7 +203,7 @@ if(isset($_GET['id'])){
                     
                     <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
                         <span class="text-muted small fst-italic">
-                            <i class="bi bi-info-circle me-1"></i> Informasi ini resmi dari akademik.
+                            <i class="bi bi-info-circle me-1"> Informasi ini resmi dari akademik.</i>
                         </span>
                         <div class="d-flex gap-2">
                             <button class="btn btn-outline-secondary rounded-circle btn-sm"><i class="bi bi-whatsapp"></i></button>

@@ -1,5 +1,5 @@
 <?php
-include "koneksi.php";
+require_once __DIR__ . "/config/koneksi.php";
 
 // --- LOGIKA PENCARIAN ---
 $keyword = ""; 
@@ -197,7 +197,7 @@ $query = mysqli_query($koneksi, $sql);
                 <span class="text-black d-none d-sm-block">INFO<span class="text-gold">KAMPUS</span></span>
             </a>
             <div class="ms-auto">
-                <a href="login.php" class="btn btn-dark rounded-pill px-4 btn-sm fw-bold border-0">
+                <a href="../login.php" class="btn btn-dark rounded-pill px-4 btn-sm fw-bold border-0">
                     <i class="bi bi-shield-lock-fill text-gold me-1"></i> 
                     <span class="btn-login-text">Admin Area</span>
                 </a>
@@ -280,7 +280,7 @@ $query = mysqli_query($koneksi, $sql);
                                 </p>
                                 
                                 <div class="mt-4 d-flex align-items-center">
-                                    <a href="detail.php?id=<?= $row['id'] ?>" class="read-more-link stretched-link">
+                                    <a href="pengumuman/detail.php?id=<?= $row['id'] ?>" class="read-more-link stretched-link">
                                         BACA SELENGKAPNYA
                                     </a>
                                     <i class="bi bi-arrow-right ms-2 text-gold"></i>

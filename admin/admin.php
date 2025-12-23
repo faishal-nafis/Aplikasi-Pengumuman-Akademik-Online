@@ -1,6 +1,6 @@
-<?php
+ <?php
 session_start();
-include "koneksi.php";
+require_once __DIR__ . '/../config/koneksi.php';
 
 if (!isset($_SESSION['user'])) {
     header("location:login.php");
