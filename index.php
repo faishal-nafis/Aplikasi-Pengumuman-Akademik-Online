@@ -193,7 +193,7 @@ $query = mysqli_query($koneksi, $sql);
     <nav class="navbar navbar-expand-lg navbar-glass fixed-top">
         <div class="container">
             <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="index.php">
-                <img src="polibatam_logo_black.png" alt="Logo" height="40">
+                <img src="assets/images/polibatam_logo_black.png" alt="Logo" height="40">
                 <span class="text-black d-none d-sm-block">INFO<span class="text-gold">KAMPUS</span></span>
             </a>
             <div class="ms-auto">
