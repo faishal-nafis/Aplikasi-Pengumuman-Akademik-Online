@@ -13,7 +13,7 @@ require_once __DIR__ . '/../config/koneksi.php';
     
     <style>
         body {
-            background-image: url('bglogin.jpg');
+            background-image: url('../assets/images/bglogin.jpg');
             
             background-size: cover;
             background-position: center;
