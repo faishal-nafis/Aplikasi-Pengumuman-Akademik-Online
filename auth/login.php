@@ -80,7 +80,7 @@ require_once __DIR__ . '/../config/koneksi.php';
 
             if (mysqli_num_rows($query) > 0) {
                 $data = mysqli_fetch_array($query);
-                $_SESSION['user'] = $data;
+                $_SESSION['user'] = $data; 
                 echo "<script>alert('Selamat datang, Administrator dan Dosen!'); location.href='../admin.php';</script>";
             }
             else {
@@ -96,14 +96,14 @@ require_once __DIR__ . '/../config/koneksi.php';
                 <div class="card card-login p-4">
                     <div class="card-header-custom mb-3">
                         <div class="mb-3">
-                            <img src="polibatam.png" alt="logo_polibatam" width="100">
+                            <img src="..\assets\images\polibatam.png" alt="logo_polibatam" width="100">
                         </div>
                         <h3 class="fw-bold text-dark">Halo! Administrator dan Dosen</h3>
                         <p class="text-muted small">Masukkan username dan password</p>
                     </div>
 
                     <div class="card-body">
-                        <form method="POST">
+                        <form action="../admin/admin.php" method="POST">
                             
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" required>
