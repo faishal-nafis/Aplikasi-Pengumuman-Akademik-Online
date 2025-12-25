@@ -32,7 +32,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM pengumuman ORDER BY tanggal_posti
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3 col-lg-2 d-md-block sidebar p-3 shadow">
-            <img src="polibatam_logo_bw.png" alt="logo" class="img-fluid mb-3">
+            <img src="../assets/images/polibatam_logo_bw.png" alt="logo" class="img-fluid mb-3">
             <hr>
             <nav class="nav flex-column">
                 <a class="nav-link active mb-2" href="#"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
