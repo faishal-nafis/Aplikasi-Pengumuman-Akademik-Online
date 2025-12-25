@@ -197,7 +197,7 @@ $query = mysqli_query($koneksi, $sql);
                 <span class="text-black d-none d-sm-block">INFO<span class="text-gold">KAMPUS</span></span>
             </a>
             <div class="ms-auto">
-                <a href="../login.php" class="btn btn-dark rounded-pill px-4 btn-sm fw-bold border-0">
+                <a href="auth/login.php" class="btn btn-dark rounded-pill px-4 btn-sm fw-bold border-0">
                     <i class="bi bi-shield-lock-fill text-gold me-1"></i> 
                     <span class="btn-login-text">Admin Area</span>
                 </a>
