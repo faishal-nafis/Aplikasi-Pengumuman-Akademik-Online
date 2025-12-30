@@ -81,7 +81,7 @@ require_once __DIR__ . '/../config/koneksi.php';
             if (mysqli_num_rows($query) > 0) {
                 $data = mysqli_fetch_array($query);
                 $_SESSION['user'] = $data; 
-                echo "<script>alert('Selamat datang, Administrator dan Dosen!'); location.href='../admin.php';</script>";
+                echo "<script>alert('Selamat datang, Administrator dan Dosen!'); location.href='../admin/admin.php';</script>";
             }
             else {
                 echo "<script>alert('Login gagal! Periksa username dan password Anda.');</script>";
@@ -103,7 +103,7 @@ require_once __DIR__ . '/../config/koneksi.php';
                     </div>
 
                     <div class="card-body">
-                        <form action="../admin/admin.php" method="POST">
+                        <form action="login.php" method="POST">
                             
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" required>
