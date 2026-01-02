@@ -7,7 +7,7 @@ session_destroy();
 
 echo "<script>
         alert('Anda telah berhasil logout!');
-        location.href = 'index.php'; 
+        location.href = '../index.php'; 
       </script>";
 
 ?>
