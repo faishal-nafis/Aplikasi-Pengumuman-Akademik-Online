@@ -3,7 +3,7 @@ session_start();
 require_once __DIR__ . '/../config/koneksi.php';
 
 if (!isset($_SESSION['user'])) {
-    header("location:login.php");
+    header("location:../auth/login.php");
     exit();
 }
 
@@ -38,7 +38,7 @@ $query = mysqli_query($koneksi, "SELECT * FROM pengumuman ORDER BY tanggal_posti
                 <a class="nav-link active mb-2" href="#"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
                 <a class="nav-link mb-2" href="tambah_pengumuman.php"><i class="bi bi-megaphone me-2"></i> Buat Info</a>
                 <hr>
-                <a class="nav-link text-danger" href="logout.php"><i class="bi bi-box-arrow-left me-2"></i> Keluar</a>
+                <a class="nav-link text-danger" href="../auth/logout.php"><i class="bi bi-box-arrow-left me-2"></i> Keluar</a>
             </nav>
         </div>
 
