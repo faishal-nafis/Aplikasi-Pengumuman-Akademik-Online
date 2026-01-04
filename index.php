@@ -1,19 +1,54 @@
 <?php
 require_once __DIR__ . "/config/koneksi.php";
 
-// --- LOGIKA PENCARIAN ---
-$keyword = ""; 
-if (isset($_GET['cari'])) {
+// --- LOGIKA PENCARIAN & FILTER ---
+$keyword = "";
+$selected_category = "";
+$filter_title = "";
+$filter_date = "";
+
+// Ambil semua kategori unik untuk dropdown filter
+$sql_kategori = "SELECT DISTINCT kategori FROM pengumuman ORDER BY kategori";
+$query_kategori = mysqli_query($koneksi, $sql_kategori);
+
+// Proses filter
+$where_conditions = [];
+$params = [];
+
+if (isset($_GET['cari']) && !empty($_GET['cari'])) {
     $keyword = $_GET['cari'];
     $safe_keyword = mysqli_real_escape_string($koneksi, $keyword);
-    $sql = "SELECT * FROM pengumuman 
-            WHERE judul LIKE '%$safe_keyword%' 
-            OR isi LIKE '%$safe_keyword%' 
-            OR kategori LIKE '%$safe_keyword%'
-            ORDER BY tanggal_posting DESC";
-} else {
-    $sql = "SELECT * FROM pengumuman ORDER BY tanggal_posting DESC";
+    $where_conditions[] = "(judul LIKE '%$safe_keyword%' OR isi LIKE '%$safe_keyword%' OR kategori LIKE '%$safe_keyword%')";
 }
+
+// Filter kategori
+if (isset($_GET['kategori']) && !empty($_GET['kategori'])) {
+    $selected_category = $_GET['kategori'];
+    $safe_category = mysqli_real_escape_string($koneksi, $selected_category);
+    $where_conditions[] = "kategori = '$safe_category'";
+}
+
+// Filter judul
+if (isset($_GET['filter_judul']) && !empty($_GET['filter_judul'])) {
+    $filter_title = $_GET['filter_judul'];
+    $safe_title = mysqli_real_escape_string($koneksi, $filter_title);
+    $where_conditions[] = "judul LIKE '%$safe_title%'";
+}
+
+// Filter tanggal
+if (isset($_GET['filter_tanggal']) && !empty($_GET['filter_tanggal'])) {
+    $filter_date = $_GET['filter_tanggal'];
+    $safe_date = mysqli_real_escape_string($koneksi, $filter_date);
+    $where_conditions[] = "DATE(tanggal_posting) = '$safe_date'";
+}
+
+// Bangun query
+$sql = "SELECT * FROM pengumuman";
+if (!empty($where_conditions)) {
+    $sql .= " WHERE " . implode(" AND ", $where_conditions);
+}
+$sql .= " ORDER BY tanggal_posting DESC";
+
 $query = mysqli_query($koneksi, $sql);
 ?>
 
@@ -131,7 +166,7 @@ $query = mysqli_query($koneksi, $sql);
             padding: 6px 12px;
             text-transform: uppercase;
             font-size: 0.7rem;
-            color: white; /* Semua teks badge putih agar kontras */
+            color: white;
         }
 
         /* 1. Merah Maroon (Jadwal Ujian) */
@@ -141,12 +176,12 @@ $query = mysqli_query($koneksi, $sql);
 
         /* 2. Ungu Tua (Perubahan Kelas) */
         .bg-purple-dark {
-            background-color: #4B0082 !important; /* Indigo/Deep Purple */
+            background-color: #4B0082 !important;
         }
 
         /* 3. Emerald Green (Beasiswa) */
         .bg-emerald {
-            background-color: #047857 !important; /* Hijau Emerald Deep */
+            background-color: #047857 !important;
         }
 
         /* 4. Royal Blue (Informasi Penting) */
@@ -175,6 +210,136 @@ $query = mysqli_query($koneksi, $sql);
             color: white;
         }
 
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .filter-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--black-deep);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-title i {
+            color: var(--gold-main);
+        }
+
+        .category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-btn {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 1px solid #dee2e6;
+            background: white;
+            color: var(--text-dark);
+        }
+
+        .category-btn:hover {
+            border-color: var(--gold-main);
+            color: var(--gold-main);
+            transform: translateY(-2px);
+        }
+
+        .category-btn.active {
+            background: var(--gold-main);
+            color: white;
+            border-color: var(--gold-main);
+        }
+
+        .filter-form {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-input-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-input-group label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .filter-input {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 8px 12px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--gold-main);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .reset-btn {
+            padding: 8px 20px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            color: var(--text-dark);
+            transition: all 0.3s;
+        }
+
+        .reset-btn:hover {
+            background: #e9ecef;
+        }
+
+        .active-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .active-filter-badge {
+            background: var(--gold-main);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .active-filter-badge i {
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
         footer {
             background: var(--black-deep);
             color: rgba(255,255,255,0.6);
@@ -185,6 +350,9 @@ $query = mysqli_query($koneksi, $sql);
             .hero-section { padding: 6rem 0 5rem 0; text-align: center; }
             .display-4 { font-size: 2rem; }
             .btn-login-text { display: none; }
+            .filter-form { flex-direction: column; }
+            .filter-actions { width: 100%; }
+            .category-filter { justify-content: center; }
         }
     </style>
 </head>
@@ -229,10 +397,105 @@ $query = mysqli_query($koneksi, $sql);
             <div class="mb-4 text-center">
                 <span class="text-muted">Hasil pencarian:</span> 
                 <strong class="fs-4 d-block mt-1">"<?= htmlspecialchars($keyword) ?>"</strong>
-                <a href="index.php" class="btn btn-sm btn-outline-dark rounded-pill mt-2">Reset</a>
             </div>
         <?php endif; ?>
 
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="filter-title">
+                <i class="bi bi-funnel-fill"></i>
+                Filter Pengumuman
+            </div>
+
+            <!-- Filter Kategori -->
+            <div class="mb-4">
+                <div class="category-filter">
+                    <a href="index.php" class="category-btn <?= empty($selected_category) ? 'active' : '' ?>">
+                        Semua
+                    </a>
+                    <?php while($kategori_row = mysqli_fetch_assoc($query_kategori)): ?>
+                        <a href="index.php?kategori=<?= urlencode($kategori_row['kategori']) ?><?= $keyword ? '&cari=' . urlencode($keyword) : '' ?><?= $filter_title ? '&filter_judul=' . urlencode($filter_title) : '' ?><?= $filter_date ? '&filter_tanggal=' . urlencode($filter_date) : '' ?>" 
+                           class="category-btn <?= $selected_category == $kategori_row['kategori'] ? 'active' : '' ?>">
+                            <?= htmlspecialchars($kategori_row['kategori']) ?>
+                        </a>
+                    <?php endwhile; ?>
+                </div>
+            </div>
+
+            <!-- Form Filter Lanjutan -->
+            <form action="index.php" method="GET" class="filter-form">
+                <input type="hidden" name="cari" value="<?= htmlspecialchars($keyword) ?>">
+                <input type="hidden" name="kategori" value="<?= htmlspecialchars($selected_category) ?>">
+                
+                <div class="filter-input-group">
+                    <label for="filter_judul">Filter Berdasarkan Judul</label>
+                    <input type="text" id="filter_judul" name="filter_judul" class="filter-input" 
+                           placeholder="Masukkan kata kunci judul..." value="<?= htmlspecialchars($filter_title) ?>">
+                </div>
+                
+                <div class="filter-input-group">
+                    <label for="filter_tanggal">Filter Berdasarkan Tanggal</label>
+                    <input type="date" id="filter_tanggal" name="filter_tanggal" class="filter-input" 
+                           value="<?= htmlspecialchars($filter_date) ?>">
+                </div>
+                
+                <div class="filter-actions">
+                    <button type="submit" class="btn btn-gold">
+                        <i class="bi bi-funnel me-1"></i> Terapkan Filter
+                    </button>
+                    <a href="index.php" class="reset-btn">
+                        <i class="bi bi-x-circle me-1"></i> Reset
+                    </a>
+                </div>
+            </form>
+
+            <!-- Tampilkan Filter Aktif -->
+            <?php if($selected_category || $filter_title || $filter_date): ?>
+                <div class="active-filters">
+                    <small class="text-muted">Filter aktif:</small>
+                    <?php if($selected_category): ?>
+                        <span class="active-filter-badge">
+                            Kategori: <?= htmlspecialchars($selected_category) ?>
+                            <a href="index.php?<?= 
+                                ($keyword ? 'cari=' . urlencode($keyword) . '&' : '') .
+                                ($filter_title ? 'filter_judul=' . urlencode($filter_title) . '&' : '') .
+                                ($filter_date ? 'filter_tanggal=' . urlencode($filter_date) : '')
+                            ?>" class="text-white">
+                                <i class="bi bi-x"></i>
+                            </a>
+                        </span>
+                    <?php endif; ?>
+                    
+                    <?php if($filter_title): ?>
+                        <span class="active-filter-badge">
+                            Judul: <?= htmlspecialchars($filter_title) ?>
+                            <a href="index.php?<?= 
+                                ($keyword ? 'cari=' . urlencode($keyword) . '&' : '') .
+                                ($selected_category ? 'kategori=' . urlencode($selected_category) . '&' : '') .
+                                ($filter_date ? 'filter_tanggal=' . urlencode($filter_date) : '')
+                            ?>" class="text-white">
+                                <i class="bi bi-x"></i>
+                            </a>
+                        </span>
+                    <?php endif; ?>
+                    
+                    <?php if($filter_date): ?>
+                        <span class="active-filter-badge">
+                            Tanggal: <?= htmlspecialchars($filter_date) ?>
+                            <a href="index.php?<?= 
+                                ($keyword ? 'cari=' . urlencode($keyword) . '&' : '') .
+                                ($selected_category ? 'kategori=' . urlencode($selected_category) . '&' : '') .
+                                ($filter_title ? 'filter_judul=' . urlencode($filter_title) : '')
+                            ?>" class="text-white">
+                                <i class="bi bi-x"></i>
+                            </a>
+                        </span>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <!-- Hasil Pengumuman -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             
             <?php if(mysqli_num_rows($query) > 0): ?>
@@ -240,10 +503,8 @@ $query = mysqli_query($koneksi, $sql);
                     
                     <?php
                         // --- LOGIKA WARNA BADGE ---
-                        // Default Style
                         $badgeClass = "bg-luxury-default"; 
                         
-                        // Override Style berdasarkan Kategori
                         if($row['kategori'] == 'Jadwal Ujian') { 
                             $badgeClass = "bg-maroon"; 
                         } 
@@ -295,7 +556,8 @@ $query = mysqli_query($koneksi, $sql);
                 
                 <div class="col-12 text-center py-5">
                     <i class="bi bi-journal-x text-muted display-1 opacity-25"></i>
-                    <h4 class="mt-3 text-dark">Tidak ada data.</h4>
+                    <h4 class="mt-3 text-dark">Tidak ada data yang sesuai dengan filter.</h4>
+                    <p class="text-muted">Coba ubah kata kunci pencarian atau atur filter Anda.</p>
                     <a href="index.php" class="text-gold text-decoration-none">Kembali ke beranda</a>
                 </div>
 
@@ -319,5 +581,19 @@ $query = mysqli_query($koneksi, $sql);
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Set max date untuk input tanggal (hari ini)
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('filter_tanggal').max = today;
+        });
+
+        // Reset form filter individual
+        function resetFilter(type) {
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.delete(type);
+            window.location.href = 'index.php?' + urlParams.toString();
+        }
+    </script>
 </body>
 </html>
