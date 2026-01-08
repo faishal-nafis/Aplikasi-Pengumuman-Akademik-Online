@@ -1,17 +1,17 @@
 <?php
 require_once __DIR__ . "/config/koneksi.php";
 
-// --- LOGIKA PENCARIAN & FILTER ---
+
 $keyword = "";
 $selected_category = "";
 $filter_title = "";
 $filter_date = "";
 
-// Ambil semua kategori unik untuk dropdown filter
+
 $sql_kategori = "SELECT DISTINCT kategori FROM pengumuman ORDER BY kategori";
 $query_kategori = mysqli_query($koneksi, $sql_kategori);
 
-// Proses filter
+
 $where_conditions = [];
 $params = [];
 
@@ -21,28 +21,28 @@ if (isset($_GET['cari']) && !empty($_GET['cari'])) {
     $where_conditions[] = "(judul LIKE '%$safe_keyword%' OR isi LIKE '%$safe_keyword%' OR kategori LIKE '%$safe_keyword%')";
 }
 
-// Filter kategori
+
 if (isset($_GET['kategori']) && !empty($_GET['kategori'])) {
     $selected_category = $_GET['kategori'];
     $safe_category = mysqli_real_escape_string($koneksi, $selected_category);
     $where_conditions[] = "kategori = '$safe_category'";
 }
 
-// Filter judul
+
 if (isset($_GET['filter_judul']) && !empty($_GET['filter_judul'])) {
     $filter_title = $_GET['filter_judul'];
     $safe_title = mysqli_real_escape_string($koneksi, $filter_title);
     $where_conditions[] = "judul LIKE '%$safe_title%'";
 }
 
-// Filter tanggal
+
 if (isset($_GET['filter_tanggal']) && !empty($_GET['filter_tanggal'])) {
     $filter_date = $_GET['filter_tanggal'];
     $safe_date = mysqli_real_escape_string($koneksi, $filter_date);
     $where_conditions[] = "DATE(tanggal_posting) = '$safe_date'";
 }
 
-// Bangun query
+
 $sql = "SELECT * FROM pengumuman";
 if (!empty($where_conditions)) {
     $sql .= " WHERE " . implode(" AND ", $where_conditions);
@@ -65,7 +65,6 @@ $query = mysqli_query($koneksi, $sql);
     
     <style>
         :root {
-            /* Palette Mewah */
             --bg-body: #f9f9f9;
             --black-deep: #121212;
             --black-soft: #1e1e1e;
@@ -82,14 +81,12 @@ $query = mysqli_query($koneksi, $sql);
 
         h1, .navbar-brand { font-family: 'Cinzel', serif; }
 
-        /* Navbar Glass */
         .navbar-glass {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* Hero Section */
         .hero-section {
             background: var(--black-deep);
             color: white;
@@ -109,7 +106,6 @@ $query = mysqli_query($koneksi, $sql);
             opacity: 0.15;
         }
 
-        /* Tombol Emas */
         .btn-gold {
             background: var(--gold-main);
             color: white;
@@ -124,7 +120,6 @@ $query = mysqli_query($koneksi, $sql);
 
         .text-gold { color: var(--gold-main) !important; }
 
-        /* Search Bar */
         .search-container {
             position: absolute;
             bottom: -30px;
@@ -142,7 +137,6 @@ $query = mysqli_query($koneksi, $sql);
             border: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        /* Kartu Pengumuman */
         .card-pengumuman {
             border: none;
             border-radius: 12px;
@@ -158,7 +152,6 @@ $query = mysqli_query($koneksi, $sql);
             border-top: 3px solid var(--gold-main);
         }
 
-        /* --- LOGIKA WARNA BADGE --- */
         .badge-base {
             font-weight: 500;
             letter-spacing: 0.5px;
@@ -169,34 +162,28 @@ $query = mysqli_query($koneksi, $sql);
             color: white;
         }
 
-        /* 1. Merah Maroon (Jadwal Ujian) */
         .bg-maroon {
             background-color: #800000 !important;
         }
 
-        /* 2. Ungu Tua (Perubahan Kelas) */
         .bg-purple-dark {
             background-color: #4B0082 !important;
         }
 
-        /* 3. Emerald Green (Beasiswa) */
         .bg-emerald {
             background-color: #047857 !important;
         }
 
-        /* 4. Royal Blue (Informasi Penting) */
         .bg-royal-blue {
             background-color: #4169E1 !important;
         }
 
-        /* Default (Hitam Emas - Jika kategori lain) */
         .bg-luxury-default {
             background-color: var(--black-deep);
             color: var(--gold-main);
             border: 1px solid var(--gold-main);
         }
 
-        /* Link Baca Selengkapnya */
         .read-more-link {
             color: var(--black-deep);
             font-weight: 600;
@@ -210,7 +197,6 @@ $query = mysqli_query($koneksi, $sql);
             color: white;
         }
 
-        /* Filter Section */
         .filter-section {
             background: white;
             border-radius: 15px;
@@ -400,14 +386,12 @@ $query = mysqli_query($koneksi, $sql);
             </div>
         <?php endif; ?>
 
-        <!-- Filter Section -->
         <div class="filter-section">
             <div class="filter-title">
                 <i class="bi bi-funnel-fill"></i>
                 Filter Pengumuman
             </div>
 
-            <!-- Filter Kategori -->
             <div class="mb-4">
                 <div class="category-filter">
                     <a href="index.php" class="category-btn <?= empty($selected_category) ? 'active' : '' ?>">
@@ -422,7 +406,6 @@ $query = mysqli_query($koneksi, $sql);
                 </div>
             </div>
 
-            <!-- Form Filter Lanjutan -->
             <form action="index.php" method="GET" class="filter-form">
                 <input type="hidden" name="cari" value="<?= htmlspecialchars($keyword) ?>">
                 <input type="hidden" name="kategori" value="<?= htmlspecialchars($selected_category) ?>">
@@ -449,7 +432,6 @@ $query = mysqli_query($koneksi, $sql);
                 </div>
             </form>
 
-            <!-- Tampilkan Filter Aktif -->
             <?php if($selected_category || $filter_title || $filter_date): ?>
                 <div class="active-filters">
                     <small class="text-muted">Filter aktif:</small>
@@ -495,14 +477,12 @@ $query = mysqli_query($koneksi, $sql);
             <?php endif; ?>
         </div>
 
-        <!-- Hasil Pengumuman -->
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             
             <?php if(mysqli_num_rows($query) > 0): ?>
                 <?php while($row = mysqli_fetch_assoc($query)): ?>
                     
                     <?php
-                        // --- LOGIKA WARNA BADGE ---
                         $badgeClass = "bg-luxury-default"; 
                         
                         if($row['kategori'] == 'Jadwal Ujian') { 
@@ -582,13 +562,12 @@ $query = mysqli_query($koneksi, $sql);
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Set max date untuk input tanggal (hari ini)
+
         document.addEventListener('DOMContentLoaded', function() {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('filter_tanggal').max = today;
         });
 
-        // Reset form filter individual
         function resetFilter(type) {
             const urlParams = new URLSearchParams(window.location.search);
             urlParams.delete(type);
