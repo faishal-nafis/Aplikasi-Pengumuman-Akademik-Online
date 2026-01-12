@@ -119,14 +119,6 @@ require_once __DIR__ . '/../config/koneksi.php';
                                 </label>
                             </div>
 
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="rememberMe">
-                                    <label class="form-check-label text-secondary small" for="rememberMe">Ingat Saya</label>
-                                </div>
-                                <a href="#" class="text-decoration-none small text-primary fw-bold">Lupa Password?</a>
-                            </div>
-
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary btn-custom-primary w-100 rounded-pill">
                                     MASUK
