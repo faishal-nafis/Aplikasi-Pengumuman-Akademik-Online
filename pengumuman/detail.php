@@ -201,8 +201,6 @@ if(isset($_GET['id'])){
                         </span>
                         <div class="d-flex gap-2">
                             <button class="btn btn-outline-secondary rounded-circle btn-sm"><i class="bi bi-whatsapp"></i></button>
-                            <button class="btn btn-outline-secondary rounded-circle btn-sm"><i class="bi bi-twitter"></i></button>
-                            <button class="btn btn-outline-secondary rounded-circle btn-sm"><i class="bi bi-facebook"></i></button>
                         </div>
                     </div>
 
