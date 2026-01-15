@@ -200,7 +200,7 @@ if(isset($_GET['id'])){
                             <i class="bi bi-info-circle me-1"> Informasi ini resmi dari akademik.</i>
                         </span>
                         <div class="d-flex gap-2">
-                            <button class="btn btn-outline-secondary rounded-circle btn-sm"><i class="bi bi-whatsapp"></i></button>
+                            <a href="https://wa.me/6281234567890" target="_blank" class="btn btn-outline-secondary rounded-circle btn-sm"><i class="bi bi-whatsapp"></i></a>
                         </div>
                     </div>
 
