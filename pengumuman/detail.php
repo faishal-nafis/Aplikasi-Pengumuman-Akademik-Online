@@ -44,7 +44,6 @@ if(isset($_GET['id'])){
             color: var(--text-dark);
         }
 
-        /* Hero Header Hitam Mewah */
         .article-hero {
             background: var(--black-deep);
             color: white;
@@ -64,10 +63,8 @@ if(isset($_GET['id'])){
 
         .hero-content { position: relative; z-index: 2; }
 
-        /* Judul Font Cinzel */
         .article-title { font-family: 'Cinzel', serif; font-weight: 700; }
 
-        /* Kartu Konten */
         .article-card {
             border: none;
             border-radius: 12px;
@@ -85,7 +82,6 @@ if(isset($_GET['id'])){
             white-space: pre-line;
         }
 
-        /* --- LOGIKA WARNA BADGE (Copy dari Index) --- */
         .badge-base {
             font-weight: 500;
             letter-spacing: 1px;
@@ -93,7 +89,7 @@ if(isset($_GET['id'])){
             padding: 0.6em 1.2em;
             text-transform: uppercase;
             font-size: 0.85rem;
-            color: white; /* Teks Putih */
+            color: white; 
         }
 
         .bg-maroon { background-color: #800000 !important; }
@@ -101,14 +97,12 @@ if(isset($_GET['id'])){
         .bg-emerald { background-color: #047857 !important; }
         .bg-royal-blue { background-color: #4169E1 !important; }
         
-        /* Default Style (Hitam Emas) */
         .bg-luxury-default {
             background-color: rgba(255,255,255,0.1);
             border: 1px solid var(--gold-main);
             color: var(--gold-main);
         }
 
-        /* Tombol Kembali */
         .btn-back {
             background: transparent;
             color: white;
