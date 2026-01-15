@@ -550,9 +550,9 @@ $query = mysqli_query($koneksi, $sql);
         <div class="container">
             <h5 class="fw-bold text-white mb-3" style="font-family: 'Cinzel', serif;">POLIBATAM</h5>
             <div class="mb-4">
-                <a href="#" class="text-white-50 mx-2"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="text-white-50 mx-2"><i class="bi bi-globe"></i></a>
-                <a href="#" class="text-white-50 mx-2"><i class="bi bi-linkedin"></i></a>
+                <a href="https://www.instagram.com/polibatamofficial/" class="text-white-50 mx-2"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.polibatam.ac.id/" class="text-white-50 mx-2"><i class="bi bi-globe"></i></a>
+                <a href="https://id.linkedin.com/school/politeknik-negeri-batam/" class="text-white-50 mx-2"><i class="bi bi-linkedin"></i></a>
             </div>
             <p class="text-muted small mb-0">
                 &copy; <?= date('Y') ?> Portal Informasi Kampus. All rights reserved.
