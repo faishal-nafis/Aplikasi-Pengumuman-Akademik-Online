@@ -83,7 +83,7 @@ if (isset($_POST['update'])) {
                             </div>
 
                             <div class="d-flex justify-content-between">
-                                <a href="dashboard.php" class="btn btn-secondary px-4">Batal</a>
+                                <a href="admin.php" class="btn btn-secondary px-4">Batal</a>
                                 <button type="submit" name="update" class="btn btn-primary px-4">
                                     <i class="bi bi-save me-1"></i> Simpan Perubahan
                                 </button>
